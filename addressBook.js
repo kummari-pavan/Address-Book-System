@@ -64,10 +64,43 @@ class ContactDetails{
         4.Email: ${this.email}
         `;
     }
+    
+    
 }
+
+// Creating stack for adding Address Book details
+class AddressBook {
+    constructor() {
+        this.contacts = []; 
+    }
+
+    addContact(contact) {
+        this.contacts.push(contact); 
+    }
+
+    displayAllContacts() {
+        if (this.contacts.length === 0) {
+            return "No contacts found in the Address Book.";
+        }
+        return this.contacts.map(contact =>
+             contact.displayContact()).join("\n");
+            
+    }
+}
+
 try {
+    let addressBook = new AddressBook();
+
     let ContactDetails1 = new ContactDetails( "Pavan", "Vemulapati", "123 Main St", "Bangalore", "karnataka", "516330", "9597878654", "kpavan@example.com");
+    let ContactDetails2 = new ContactDetails( "Charan", "Vemulapati", "123 Main St", "Bangalore", "karnataka", "516330", "9597878654", "charan@example.com");
     console.log(ContactDetails1.displayContact());
+    console.log(ContactDetails2.displayContact());
+
+    addressBook.addContact(ContactDetails1); 
+    addressBook.addContact(ContactDetails2); 
+
+    // Display all contacts in the Address Book
+    console.log(addressBook.displayAllContacts());
 } 
 catch (error) {
     console.error(error.message);
