@@ -130,6 +130,32 @@ class AddressBook {
         console.log(`Number of contacts: ${c}`);
         return c;
     }
+  
+    //search contacts USING city
+    searchWithCity(city) {
+        const contactsInCity = this.contacts.filter(contact => contact.city === city);
+        if (contactsInCity.length > 0) {
+            console.log(`Contacts in ${city}:`);
+            contactsInCity.forEach(contact => {
+                console.log(`${contact.firstName} ${contact.lastName}`);
+            });
+        } else {
+            console.log(`No contacts found in ${city}.`);
+        }
+    }
+
+    //search contacts USING state
+    searchWITHState(state) {
+        const contactsInState = this.contacts.filter(contact => contact.state === state);
+        if (contactsInState.length > 0) {
+            console.log(`Contacts in ${state}:`);
+            contactsInState.forEach(contact => {
+                console.log(`${contact.firstName} ${contact.lastName}`);
+            });
+        } else {
+            console.log(`No contacts found in ${state}.`);
+        }
+    }
 
     displayAllContacts() {
         if (this.contacts.length === 0) {
@@ -177,6 +203,9 @@ try {
     addressBook.deleteContactByName("Pavan","k");
     //findNumberOfContacts
     addressBook.findNumberOfContacts()
+
+    addressBook.searchWithCity("Bangalore");
+    addressBook.searchWITHState("Karnataka");
 
     console.log(addressBook.displayAllContacts());
 
