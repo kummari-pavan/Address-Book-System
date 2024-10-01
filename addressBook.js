@@ -61,8 +61,7 @@ class ContactDetails{
         1.Name: ${this.firstName} ${this.lastName}
         2.Address: ${this.address}, ${this.city}, ${this.state}, ${this.zip}
         3.Phone: ${this.phoneNumber}
-        4.Email: ${this.email}
-        `;
+        4.Email: ${this.email} `;
     }
     
     
@@ -76,6 +75,29 @@ class AddressBook {
 
     addContact(contact) {
         this.contacts.push(contact); 
+    }
+
+    findContactByName(firstName, lastName) {
+        return this.contacts.find(contact => contact.firstName === firstName && contact.lastName === lastName);
+    }
+
+    editContactByName(firstName, lastName, newContactDetails) {
+        const contact = this.findContactByName(firstName, lastName);
+        if (contact) {
+            contact.editContact(
+                newContactDetails.firstName,
+                newContactDetails.lastName,
+                newContactDetails.address,
+                newContactDetails.city,
+                newContactDetails.state,
+                newContactDetails.zip,
+                newContactDetails.phoneNumber,
+                newContactDetails.email
+            );
+            console.log("Contact updated successfully.");
+        } else {
+            console.log("Contact not found.");
+        }
     }
 
     displayAllContacts() {
@@ -101,6 +123,24 @@ try {
 
     // Display all contacts in the Address Book
     console.log(addressBook.displayAllContacts());
+
+
+    //Now im Editing The Details
+    const updatedingDetails = {
+        firstName: "Pavan",
+        lastName: "k",
+        address: "123 Main St",
+        city: "Bangalore",
+        state: "karnataka",
+        zip: "516330",
+        phoneNumber: "9597878654",
+        email: "kpavan@example.com"
+    };
+    //Giving arguments To editContactByName method
+    addressBook.editContactByName("Pavan", "k", updatedingDetails);
+
+    console.log(addressBook.displayAllContacts());
+
 } 
 catch (error) {
     console.error(error.message);
