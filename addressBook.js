@@ -86,7 +86,7 @@ class AddressBook {
             contact.displayContact()).join("\n");
             
     }
-}
+} 
 
 try {
     let addressBook = new AddressBook();
