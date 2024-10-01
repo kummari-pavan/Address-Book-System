@@ -184,6 +184,43 @@ class AddressBook {
             console.log(`No contacts found in State: ${state}`);
         }
     }
+    
+    //Count No.of Persons Contacts by City
+    countContactsByCity() {
+        let cityCount = {};
+        
+        for (let i = 0; i < this.contacts.length; i++) {
+            let city = this.contacts[i].city;
+            if (cityCount[city]) {
+                cityCount[city]++;
+            } else {
+                cityCount[city] = 1;
+            }
+        }
+
+        console.log("Contact Count by City:");
+        for (let city in cityCount) {
+            console.log(city + ": " + cityCount[city]);
+        }
+    }
+
+    //Count No.of Persons Contacts by State
+    countContactsByState() {
+        let stateCount = {};
+        for (let i = 0; i < this.contacts.length; i++) {
+            let state = this.contacts[i].state;
+            if (stateCount[state]) {
+                stateCount[state]++;
+            } else {
+                stateCount[state] = 1;
+            }
+        }
+
+        console.log("Contact Count by State:");
+        for (let state in stateCount) {
+            console.log(state + ": " + stateCount[state]);
+        }
+    }
 
     displayAllContacts() {
         if (this.contacts.length === 0) {
@@ -237,6 +274,9 @@ try {
 
     addressBook.viewPersonsByCity("Bangalore");  
     addressBook.viewPersonsByState("Karnakata");
+
+    addressBook.countContactsByCity();
+    addressBook.countContactsByState();
 
     console.log(addressBook.displayAllContacts());
 
