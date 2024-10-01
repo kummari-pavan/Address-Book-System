@@ -102,7 +102,6 @@ try {
     // Display all contacts in the Address Book
     console.log(addressBook.displayAllContacts());
 
-
 } 
 catch (error) {
     console.error(error.message);
