@@ -61,7 +61,8 @@ class ContactDetails{
         1.Name: ${this.firstName} ${this.lastName}
         2.Address: ${this.address}, ${this.city}, ${this.state}, ${this.zip}
         3.Phone: ${this.phoneNumber}
-        4.Email: ${this.email}`;
+        4.Email: ${this.email}
+        `;
     }
     
 }
@@ -75,6 +76,7 @@ class AddressBook {
     addContact(contact) {
         this.contacts.push(contact); 
     }
+
 
     displayAllContacts() {
         if (this.contacts.length === 0) {
@@ -99,6 +101,8 @@ try {
 
     // Display all contacts in the Address Book
     console.log(addressBook.displayAllContacts());
+
+
 } 
 catch (error) {
     console.error(error.message);
