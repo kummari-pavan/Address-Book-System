@@ -99,6 +99,17 @@ class AddressBook {
             console.log("Contact not found.");
         }
     }
+    //Delete Method using name
+    deleteContactByName(firstName, lastName) {
+        const initialLength = this.contacts.length;
+        this.contacts = this.contacts.filter(contact => !(contact.firstName === firstName && contact.lastName === lastName));
+        
+        if (this.contacts.length < initialLength) {
+            console.log(`Contact ${firstName} ${lastName} deleted successfully.`);
+        } else {
+            console.log(`Contact ${firstName} ${lastName} not found.`);
+        }
+    }
 
     displayAllContacts() {
         if (this.contacts.length === 0) {
@@ -138,6 +149,8 @@ try {
     };
     //Giving arguments To editContactByName method
     addressBook.editContactByName("Pavan", "k", updatedingDetails);
+
+    addressBook.deleteContactByName("Pavan","k");
 
     console.log(addressBook.displayAllContacts());
 
