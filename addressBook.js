@@ -157,6 +157,34 @@ class AddressBook {
         }
     }
 
+     //view persons by a specific city
+     viewPersonsByCity(city) {
+        const filteredContacts = this.contacts.filter(contact => contact.city.toLowerCase() === city.toLowerCase());
+
+        if (filteredContacts.length > 0) {
+            console.log(`Persons in City: ${city}`);
+            filteredContacts.forEach(contact => {
+                console.log(`- ${contact.firstName} ${contact.lastName}, Address: ${contact.address}, Zip: ${contact.zip}, Phone: ${contact.phone}, Email: ${contact.email}`);
+            });
+        } else {
+            console.log(`No contacts found in City: ${city}`);
+        }
+    }
+
+    // view persons by a specific state
+    viewPersonsByState(state) {
+        const filteredContacts = this.contacts.filter(contact => contact.state.toLowerCase() === state.toLowerCase());
+
+        if (filteredContacts.length > 0) {
+            console.log(`Persons in State: ${state}`);
+            filteredContacts.forEach(contact => {
+                console.log(`- ${contact.firstName} ${contact.lastName}, Address: ${contact.address}, Zip: ${contact.zip}, Phone: ${contact.phone}, Email: ${contact.email}`);
+            });
+        } else {
+            console.log(`No contacts found in State: ${state}`);
+        }
+    }
+
     displayAllContacts() {
         if (this.contacts.length === 0) {
             return "No contacts found in the Address Book.";
@@ -206,6 +234,9 @@ try {
 
     addressBook.searchWithCity("Bangalore");
     addressBook.searchWITHState("Karnataka");
+
+    addressBook.viewPersonsByCity("Bangalore");  
+    addressBook.viewPersonsByState("Karnakata");
 
     console.log(addressBook.displayAllContacts());
 
