@@ -73,8 +73,22 @@ class AddressBook {
         this.contacts = []; 
     }
 
-    addContact(contact) {
-        this.contacts.push(contact); 
+    // addContact(contact) {
+    //     this.contacts.push(contact); 
+    // }
+
+    addContact(newContact) {
+
+        const duplicateContacts = this.contacts.filter(contact => 
+            contact.firstName === newContact.firstName && contact.lastName === newContact.lastName
+        );
+
+        if (duplicateContacts.length === 0) {
+            this.contacts.push(newContact);
+            console.log(`Contact ${newContact.firstName} ${newContact.lastName} added successfully.`);
+        } else {
+            console.log(`Duplicate entry! Contact ${newContact.firstName} ${newContact.lastName} already exists.`);
+        }
     }
 
     findContactByName(firstName, lastName) {
@@ -132,11 +146,15 @@ try {
 
     let ContactDetails1 = new ContactDetails( "Pavan", "Vemulapati", "123 Main St", "Bangalore", "karnataka", "516330", "9597878654", "kpavan@example.com");
     let ContactDetails2 = new ContactDetails( "Charan", "Vemulapati", "123 Main St", "Bangalore", "karnataka", "516330", "9597878654", "charan@example.com");
+    let ContactDetails3 = new ContactDetails( "Charan", "Vemulapati", "123 Main St", "Bangalore", "karnataka", "516330", "9597878654", "charan@example.com");
+
     console.log(ContactDetails1.displayContact());
     console.log(ContactDetails2.displayContact());
 
     addressBook.addContact(ContactDetails1); 
     addressBook.addContact(ContactDetails2); 
+
+    addressBook.addContact(ContactDetails3);
 
     // Display all contacts in the Address Book
     console.log(addressBook.displayAllContacts());
