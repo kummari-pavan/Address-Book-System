@@ -81,7 +81,7 @@ class AddressBook {
             return "No contacts found in the Address Book.";
         }
         return this.contacts.map(contact =>
-             contact.displayContact()).join("\n");
+            contact.displayContact()).join("\n");
             
     }
 }
