@@ -61,10 +61,8 @@ class ContactDetails{
         1.Name: ${this.firstName} ${this.lastName}
         2.Address: ${this.address}, ${this.city}, ${this.state}, ${this.zip}
         3.Phone: ${this.phoneNumber}
-        4.Email: ${this.email}
-        `;
+        4.Email: ${this.email}`;
     }
-    
     
 }
 
