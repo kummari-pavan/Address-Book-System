@@ -71,11 +71,22 @@ class ContactDetails{
 class AddressBook {
     constructor() {
         this.contacts = []; 
+        this.addressBooks = {};
     }
 
     // addContact(contact) {
     //     this.contacts.push(contact); 
     // }
+
+    // Create a new address book
+    createAddressBook(bookName) {
+        if (this.addressBooks[bookName]) {
+            console.log(`Address Book '${bookName}' already exists.`);
+        } else {
+            this.addressBooks[bookName] = [];
+            console.log(`Address Book '${bookName}' created successfully!`);
+        }
+    }
 
     addContact(newContact) {
 
@@ -90,6 +101,20 @@ class AddressBook {
             console.log(`Duplicate entry! Contact ${newContact.firstName} ${newContact.lastName} already exists.`);
         }
     }
+
+    addContactToBook(bookName, contacts) {
+        if (this.addressBooks[bookName]) {
+            if (!this.isDuplicateContact(bookName, contacts.firstName, contacts.lastName)) {
+                this.addressBooks[bookName].push(contacts);
+                console.log(`Contact '${contacts.firstName} ${contacts.lastName}' added to '${bookName}' successfully!`);
+            } else {
+                console.log(`Duplicate entry: Contact '${contacts.firstName} ${contacts.lastName}' already exists in '${bookName}'.`);
+            }
+        } else {
+            console.error(`Address Book '${bookName}' does not exist.`);
+        }
+    }
+
 
     findContactByName(firstName, lastName) {
         return this.contacts.find(contact => contact.firstName === firstName && contact.lastName === lastName);
@@ -221,6 +246,21 @@ class AddressBook {
             console.log(state + ": " + stateCount[state]);
         }
     }
+    
+   // Sort contacts by name (first name, then last name)
+   sortContactsByName(bookName) {
+        if (this.addressBooks[bookName]) {
+            this.addressBooks[bookName].sort((a, b) => {
+                const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+                const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+                return nameA.localeCompare(nameB);
+            });
+            console.log(`Contacts in '${bookName}' sorted by name:`);
+            this.displayContactsFromBook(bookName);
+        } else {
+            console.error(`Address Book '${bookName}' does not exist.`);
+        }
+    }
 
     displayAllContacts() {
         if (this.contacts.length === 0) {
@@ -230,10 +270,24 @@ class AddressBook {
              contact.displayContact()).join("\n");
             
     }
+
+     // list all available address books
+     listAddressBooks() {
+        const bookNames = Object.keys(this.addressBooks);
+        if (bookNames.length === 0) {
+            console.log("No address books available.");
+        } else {
+            console.log("Available Address Books:");
+            bookNames.forEach(bookName => console.log(bookName));
+        }
+    }
 }
 
+let addressBook = new AddressBook();
+addressBook.createAddressBook("Person-Book-1");
+
 try {
-    let addressBook = new AddressBook();
+    
 
     let ContactDetails1 = new ContactDetails( "Pavan", "Vemulapati", "123 Main St", "Bangalore", "karnataka", "516330", "9597878654", "kpavan@example.com");
     let ContactDetails2 = new ContactDetails( "Charan", "Vemulapati", "123 Main St", "Bangalore", "karnataka", "516330", "9597878654", "charan@example.com");
@@ -244,11 +298,15 @@ try {
 
     addressBook.addContact(ContactDetails1); 
     addressBook.addContact(ContactDetails2); 
-
     addressBook.addContact(ContactDetails3);
+
+    addressBook.addContactToBook("Person-Book-1", ContactDetails1);
+    addressBook.addContactToBook("Person-Book-1", ContactDetails2);
+    addressBook.addContactToBook("Person-Book-1", ContactDetails3);
 
     // Display all contacts in the Address Book
     console.log(addressBook.displayAllContacts());
+    addressBook.listAddressBooks();
 
 
     //Now im Editing The Details
@@ -284,3 +342,7 @@ try {
 catch (error) {
     console.error(error.message);
 }
+
+
+// Sort and display contacts by name
+addressBook.sortContactsByName("Person-Book-1");
